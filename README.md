@@ -6,7 +6,7 @@ git clone git@github.com:helloyongwei/AJAX-demo.git
 ```
 # 运行
 
-进入`AJAX-Promise-demo目录, 并执行:
+进入`AJAX-Promise-demo`目录, 并执行:
 ```
 node server.js 8888
 ```
