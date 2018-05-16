@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>AJAX-Promise-demo</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <button id=btn>点击我</button>
+    <script>
+        window.$ = window.jQuery
+        window.jQuery.ajax = function(options) {
+            return  new Promise(function(resolve, reject) {
+                let url  = options.url
+                let method = options.method
+                let body = options.body
+                let xhr = new XMLHttpRequest()
+                xhr.open(method, url)
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === 4) {
+                        if (xhr.status >= 200 ) {
+                            resolve.call(undefined, xhr.response)
+                        } else {
+                            reject.call(undefined, xhr)
+                        }
+                    }
+                }
+                xhr.send(body)
+            })
+        }
+
+        function success(text) {console.log(text+' 我执行成功了!')}
+        function fail(str){console.log('我执行失败了 '+str)}
+
+        btn.addEventListener('click', function(e) {
+            $.ajax({
+                    url: '/xxx',
+                    method: 'GET'
+                } ).then(success, fail)
+        })
+    </script>
+</body>
+</html>
